@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import org.smartwork.json.intf.JsonReader;
-import org.smartwork.json.reader.FileReaderImpl;
 import org.smartwork.json.reader.UrlReaderImpl;
 
 public class App {
@@ -18,7 +17,7 @@ public class App {
 		log.info("--Demo JSON Reader--");
 		boolean loop = true;
 		log.info(
-				"\n Type 1 for 'Reading JSON using URL' & Enter \n Type 2 for 'Reading JSON using File' & Enter \n Type 0 or exit to exit & Enter;\nEnter '' or any character to continue");
+				"\n Type 1 for 'To type new URL' & Enter \n Type 2 for 'To use the URL from properties' & Enter \n Type 0 or exit to exit & Enter;\nEnter '' or any character to continue");
 		while (loop) {
 			String s = in.nextLine();
 			switch (s) {
@@ -35,16 +34,15 @@ public class App {
 			}
 			case "2": {
 				log.info(
-						"Enter the complete json url:\n for eg:\"sample.json\" or \"F:/home/anand/files/sample.json\"");
-				s = in.nextLine();
-				JsonReader fileReader = new FileReaderImpl(s);
+						"Reading from resources.properties");
+				JsonReader fileReader = new UrlReaderImpl("");
 				fileReader.execute();
 				break;
 			}
 			case "":
 			default: {
 				log.info(
-						"\n Enter 1 for 'Reading JSON using URL'\n Enter 2 for 'Reading JSON using File'\n Enter 0 or exit to exit;\nEnter '' or any character to continue");
+						"\n Type 1 for 'To type new URL' & Enter \n Type 2 for 'To use the URL from properties' & Enter \n Type 0 or exit to exit & Enter;\nEnter '' or any character to continue");
 				continue;
 			}
 			}

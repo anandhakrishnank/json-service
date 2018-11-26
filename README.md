@@ -24,8 +24,8 @@ Unit Testing:
 
 Run the Main Program: App.java
 
-Type 1 for 'Reading JSON using URL' & Enter </br>
-Type 2 for 'Reading JSON using File' & Enter </br>
+Type 1 for 'To type new URL' & Enter </br>
+Type 2 for 'To use the URL from properties' & Enter </br>
 Type 0 or exit to exit & Enter;</br>
 Enter '' or any character to continue</br>
 
@@ -36,8 +36,7 @@ To test using URL:</br>
 
 To test using File:</br>
 1: Type 2 & press Enter.</br>
-2: Type the absolute path & press Enter.</br>
-&nbsp;&nbsp;&nbsp;for eg:"sample.json" or "F:/home/anand/files/sample.json"</br>
+Note: please configure resources.properties with valid url. </br>
 
 Type 0 & press Enter to exit.</br>
 Type any character & press Enter to retest again.</br>
