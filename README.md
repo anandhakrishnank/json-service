@@ -24,20 +24,21 @@ Unit Testing:
 
 Run the Main Program:
 
-Type 1 for 'Reading JSON using URL' & Enter 
-Type 2 for 'Reading JSON using File' & Enter 
-Type 0 or exit to exit & Enter;
-Enter '' or any character to continue
+Type 1 for 'Reading JSON using URL' & Enter </br>
+Type 2 for 'Reading JSON using File' & Enter </br>
+Type 0 or exit to exit & Enter;</br>
+Enter '' or any character to continue</br>
 
-To test using URL:
-1: Type 1 & press Enter.
-2: Type the URL & press Enter.
-   for eg: "http://demo3130008.mockable.io/json-service"
+To test using URL:</br>
+1: Type 1 & press Enter.</br>
+2: Type the URL & press Enter.</br>
+&nbsp;&nbsp;&nbsp;for eg: "http://demo3130008.mockable.io/json-service"</br>
 
-To test using File:
-1: Type 2 & press Enter.
-2: Type the absolute path & press Enter.
-   for eg:"sample.json" or "F:/home/anand/files/sample.json"
+To test using File:</br>
+1: Type 2 & press Enter.</br>
+2: Type the absolute path & press Enter.</br>
+&nbsp;&nbsp;&nbsp;for eg:"sample.json" or "F:/home/anand/files/sample.json"</br>
 
-Type 0 to exit
+Type 0 & press Enter to exit.</br>
+Type any character & press Enter to retest again.</br>
 
