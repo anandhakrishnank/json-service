@@ -1,7 +1,13 @@
 package org.smartwork.json;
 
+import static org.smartwork.json.utils.ConfigLoader.getProperty;
+import static org.smartwork.json.utils.ConfigLoader.getPropertyAsInt;
+import static org.smartwork.json.utils.Constants.JSON_URL_TIMEOUT;
+import static org.smartwork.json.utils.Constants.RESPONSE_BY_FILE;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -9,22 +15,33 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import org.smartwork.json.model.JsonResponse;
 
 import com.google.gson.Gson;
-import static org.smartwork.json.utils.ConfigLoader.*;
-import static org.smartwork.json.utils.Constants.*;
 
 public class SimpleJSONReader {
 
 	private static final Logger log = Logger.getLogger(SimpleJSONReader.class.getName());
 
-	public static String getJsonByUrl(String path) {
+	// Defaulting the json path to json available in src/main/resources/sample.json
+
+	private String jsonPath = getProperty(RESPONSE_BY_FILE);
+
+	public SimpleJSONReader(String jsonPath) {
+		this.jsonPath = jsonPath;
+	}
+
+	public void execute() {
+
+	}
+
+	public String getJsonByUrl() {
 		HttpURLConnection connection = null;
 		try {
-			URL url = new URL(path);
+			URL url = new URL(jsonPath);
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("Content-length", "0");
@@ -64,12 +81,12 @@ public class SimpleJSONReader {
 		return null;
 	}
 
-	public static String getJsonByFile(String path) {
+	public String getJsonByFile() {
 		String mJsonString = null;
 		BufferedInputStream fileInputStream = null;
 		try {
 			// Loading the file from the current classloaders classpath
-			fileInputStream = (BufferedInputStream) (SimpleJSONReader.class).getClassLoader().getResourceAsStream(path);
+			fileInputStream = new BufferedInputStream(new FileInputStream(jsonPath));
 
 			int size = fileInputStream.available();
 			byte[] buffer = new byte[size];
@@ -92,30 +109,11 @@ public class SimpleJSONReader {
 		return mJsonString;
 	}
 
-	public static void main(String[] args) throws IOException {
-
-		String mJsonString = getJsonByFile(getProperty(RESPONSE_BY_FILE));
-
-		String jsonResponseFromURL = getJsonByUrl(getProperty(RESPONSE_BY_URL));
-
-		if (jsonResponseFromURL != null) {
-			processJSON(jsonResponseFromURL);
-		}
-
-		if (mJsonString != null) {
-			processJSON(mJsonString);
-		}
-
-		log.info("--The End--");
-
-	}
-
 	/**
-	 * This method uses Gson to parse the JSON message, and process the Message as below
-	 * 1) Loops through Array of JsonResponse.
-	 * 2) Gets Value of Number key as int Array.
-	 * 3) Sums all the int values in Array.
-	 * 4) Add the sum of individual array to find total of all arrays.
+	 * This method uses Gson to parse the JSON message, and process the Message as
+	 * below 1) Loops through Array of JsonResponse. 2) Gets Value of Number key as
+	 * int Array. 3) Sums all the int values in Array. 4) Add the sum of individual
+	 * array to find total of all arrays.
 	 * 
 	 * @param jsonMessage
 	 */
@@ -136,6 +134,57 @@ public class SimpleJSONReader {
 		} catch (Exception ex) {
 			log.severe(ex.getMessage());
 		}
+
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		Scanner in = new Scanner(System.in);
+		log.info("--Demo JSON Reader--");
+		boolean loop = true;
+		String jsonResponse = null;
+		log.info(
+				"\n Type 1 for 'Reading JSON using URL' & Enter \n Type 2 for 'Reading JSON using File' & Enter \n Type 0 or exit to exit & Enter;\nEnter '' or any character to continue");
+		while (loop) {
+			String s = in.nextLine();
+			switch (s) {
+			case "0":
+			case "exit":
+				System.exit(0);
+				;
+			case "1": {
+				log.info("Enter the complete json url:\n for eg:\"http://demo3130008.mockable.io/json-service\"");
+				s = in.nextLine();
+				SimpleJSONReader urlReader = new SimpleJSONReader(s);
+				jsonResponse = urlReader.getJsonByUrl();
+				break;
+			}
+			case "2": {
+				log.info(
+						"Enter the complete json url:\n for eg:\"sample.json\" or \"F:/home/anand/files/sample.json\"");
+				s = in.nextLine();
+				SimpleJSONReader fileReader = new SimpleJSONReader(s);
+				jsonResponse = fileReader.getJsonByFile();
+				break;
+			}
+			case "":
+			default: {
+				log.info(
+						"\n Enter 1 for 'Reading JSON using URL'\n Enter 2 for 'Reading JSON using File'\n Enter 0 or exit to exit;\nEnter '' or any character to continue");
+				continue;
+			}
+			}
+
+			if (jsonResponse != null) {
+				processJSON(jsonResponse);
+			} else {
+				log.severe("Unable to get Valid JSON Response");
+			}
+
+		}
+		in.close();
+
+		log.info("--The End--");
 
 	}
 
