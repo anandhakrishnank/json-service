@@ -22,7 +22,7 @@ JSON Structure will be [{"key":"value","numbers":[1,2,3,4,5]}, {"key":"value","n
 
 Unit Testing:
 
-Run the Main Program:
+Run the Main Program: App.java
 
 Type 1 for 'Reading JSON using URL' & Enter </br>
 Type 2 for 'Reading JSON using File' & Enter </br>

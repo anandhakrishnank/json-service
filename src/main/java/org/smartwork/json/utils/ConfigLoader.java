@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import org.smartwork.json.SimpleJSONReader;
-
 public class ConfigLoader {
 
-	private static final Logger log = Logger.getLogger(SimpleJSONReader.class.getName());
+	private static final Logger log = Logger.getLogger(ConfigLoader.class.getName());
 
 	private static Properties config = new Properties();
 

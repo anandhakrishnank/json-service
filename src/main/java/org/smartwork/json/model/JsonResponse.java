@@ -3,9 +3,9 @@ package org.smartwork.json.model;
 import java.util.Arrays;
 
 public class JsonResponse {
-	
+
 	private String key;
-	
+
 	private int[] numbers;
 
 	public String getKey() {
@@ -28,9 +28,5 @@ public class JsonResponse {
 	public String toString() {
 		return "SampleResponse [key=" + key + ", numbers=" + Arrays.toString(numbers) + "]";
 	}
-	
-	
-	
-	
 
 }
