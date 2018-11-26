@@ -22,6 +22,22 @@ JSON Structure will be [{"key":"value","numbers":[1,2,3,4,5]}, {"key":"value","n
 
 Unit Testing:
 
-for file : use sample.json in src/main/resources (or provide absolute path of the json file)
+Run the Main Program:
 
-for url : use http://demo3130008.mockable.io/json-service as URL (or register new URL and provide as input
+Type 1 for 'Reading JSON using URL' & Enter 
+Type 2 for 'Reading JSON using File' & Enter 
+Type 0 or exit to exit & Enter;
+Enter '' or any character to continue
+
+To test using URL:
+1: Type 1 & press Enter.
+2: Type the URL & press Enter.
+   for eg: "http://demo3130008.mockable.io/json-service"
+
+To test using File:
+1: Type 2 & press Enter.
+2: Type the absolute path & press Enter.
+   for eg:"sample.json" or "F:/home/anand/files/sample.json"
+
+Type 0 to exit
+
